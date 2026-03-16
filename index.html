@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta property="og:title" content="I have a gift for you... ❤️">
+<meta property="og:description" content="Click for your message..">
+<meta property="og:image" content="https://seferovrusif.github.io/14feb/sekil.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You | 14 Febuary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --soft-pink: #ffb3c1;
+            --bg-gradient: radial-gradient(circle, #ffffff 0%, #ffe3e8 100%);
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            background: #ffffff; /* İlkin fon ağ */
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            transition: background 3s ease;
+        }
+
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; z-index: 100;
+            display: flex; justify-content: center; align-items: center;
+            transition: all 1.5s ease;
+        }
+
+        .start-btn {
+            padding: 20px 40px;
+            border: 2px solid var(--primary-pink);
+            background: transparent;
+            color: var(--primary-pink);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+            transition: 0.4s;
+        }
+
+        .start-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* main card*/
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            z-index: 10;
+            max-width: 80%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 2s ease;
+        }
+
+        .heart-main {
+            font-size: 60px;
+            color: var(--primary-pink);
+            filter: drop-shadow(0 0 10px rgba(255, 77, 109, 0.5));
+            animation: pulse 1.2s infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #typewriter {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* live  Hearts (Particles) */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 5s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-20vh) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <button class="start-btn" onclick="revealSurprise()">Small suprise for you...</button>
+    </div>
+
+    <div class="glass-card" id="mainCard">
+        <div class="heart-main">❤</div>
+        <h1 id="title"></h1>
+        <p id="typewriter"></p>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // you can change the message 
+        const message = "Sən mənim dünyamı gözəlləşdirən ən parlaq ulduzsan. Hər anımız, hər gülüşün mənim üçün çox dəyərlidir. Yaxşı ki varsan, yaxşı ki mənimləsən. 14 Fevralımız mübarək! ❤️";
+        const titleText = "My Dear Love,";
+
+        function revealSurprise() {
+            // Start Music
+            const music = document.getElementById('bgMusic');
+            music.play().catch(() => console.log("you need to click for music"));
+
+            // remove enterance
+            const overlay = document.getElementById('overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 1500);
+
+            // change background
+            document.body.style.background = "radial-gradient(circle, #fff0f3 0%, #ffccd5 100%)";
+
+            // show card
+            const card = document.getElementById('mainCard');
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+
+            // Start words
+            document.getElementById('title').innerText = titleText;
+            setTimeout(() => typeWriter(message, "typewriter", 80), 1000);
+
+            // and Heart rain
+            setInterval(createEnhancedParticle, 200);
+        }
+
+        function typeWriter(text, elementId, speed) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        function createEnhancedParticle() {
+            const p = document.createElement('div');
+            const sizes = ['20px', '30px', '40px', '15px'];
+            const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#c9184a'];
+            
+            p.innerHTML = '❤';
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = sizes[Math.floor(Math.random() * sizes.length)];
+            p.style.color = colors[Math.floor(Math.random() * colors.length)];
+            p.style.filter = `blur(${Math.random() * 2}px)`; // blur for deepest effect
+            p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 5000);
+        }
+    </script>
+</body>
+</html>
